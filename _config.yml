@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Giovanni Cammisa"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/avatar/avatar,jpg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Higly skilled google user.<br/> Sometimes I do techy stuff"
   location         : "Brescia - Italy"
   email            :
