@@ -3,22 +3,22 @@
 #
 
 # Name of your site (displayed in the navbar)
-name: brutalist-blog
+name: gcammisa's projects log
 
 # Your site's title (e.g., Ben's Awesome Site, The GitHub Blog, etc.), used as part of the title tag like Home | Ben's Awesome Site.
-title: brutalist-blog
+title: gcammisa's projects log
 
 # Link to avatar in the navbar (/assets/images/avatar.png). Leave empty if no logo desired. Two avatars for light and dark mode.
 # Avatar for light mode site
-lightavatar: /assets/images/light_bauhaus_logo.png
+lightavatar: https://avatars.githubusercontent.com/u/9705446
 # Avatar for dark mode site
-darkavatar: /assets/images/dark_bauhaus_logo.png
+darkavatar: https://avatars.githubusercontent.com/u/9705446
 
 # A short description (e.g., A blog dedicated to reviewing cat gifs), used as part of the title tag like Ben's Awesome Site | A blog dedicated to reviewing cat gifs instead of Ben's Awesome Site | Long description about a blog dedicated to reviewing cat gifs that would be used when page.title is not defined.
-tagline: Minimalistic Jekyll theme that automatically supports dark and light modes for blogs
+tagline: Just a computer engineering student's projects log
 
 # A longer description used for the description meta tag. Also used as fallback for pages that don't provide their own description, and also as part of the page's title tag if neither page.title nor site.tagline has been defined.
-description: Minimalistic Jekyll theme that automatically supports dark and light modes for blogs
+description: Just a computer engineering student's projects log
 
 # The full URL to your site. Note: site.github.url will be used by default.
 url:
@@ -30,10 +30,10 @@ url:
 baseurl: ""
 
 # global author information
-author: andrew-park
+author: gcammisa
 
 # URL to a site-wide logo (e.g., /assets/your-company-logo.png)
-logo: /assets/images/light_bauhaus_logo.png
+logo: https://avatars.githubusercontent.com/u/9705446
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics:
@@ -42,13 +42,13 @@ permalink: /:year/:month/:day/:title/
 
 # Includes an icon in the footer for each username you enter
 footer-links:
-  email: mkie0125@gmail.com
+  email: 
   facebook:
-  github: andrewhwanpark/brutalist-blog
-  instagram: andrewhwanpark
-  linkedin: andrewhwanpark
+  github: gcammisa/gcammisa.github.io
+  instagram: 
+  linkedin: 
   rss: # just type anything here for a working RSS icon
-  twitter: andrewhwanpark
+  twitter: GiovanniCammisa
 
 plugins:
   - jekyll-seo-tag
