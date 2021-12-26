@@ -236,6 +236,6 @@ if __name__ == "__main__":
     badapple()
 ```
 
-And here's the result!
+And here's the result! (It's a youtube video, click on the thumbnail!)
 
 [![YOUTUBE VIDEO](http://img.youtube.com/vi/nImuWfNGEpQ/0.jpg)](http://www.youtube.com/watch?v=nImuWfNGEpQ "Bad Apple!")
