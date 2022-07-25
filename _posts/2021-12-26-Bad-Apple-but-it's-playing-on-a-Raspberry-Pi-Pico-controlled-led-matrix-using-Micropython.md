@@ -50,6 +50,7 @@ There are many better ways to do this (like just using a simple binary file, or 
 So what we need is a python script that reads all our bitmaps containing the frames, writes a 1 or 0 for each pixel of each bitmap, rearranges the bits to account for the wiring of the matrices and then saves the output as hex text.  
 I did this in two different "stages": one script to convert the bitmaps to binary text and another script to convert that to hex text
 The scripts are extremely ugly, but they work and we only need to run them once.  
+
 Code to convert the bitmaps to binary text:
 ```python
 from PIL import Image
