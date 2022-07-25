@@ -130,11 +130,11 @@ f.close()
 It's ugly and kinda slow, but it gets the job done and we need to run it only once.  
 
 Now we need to write some micropython code to control our led matrices, which is basically a long folded string of WS2812b LEDs.  
-Somebody for sure has already used WS2812b with the pi pico, right? Right.  
-I don't think reinventing the wheel is a smart thing to do (usually), so let's start from [THIS](https://core-electronics.com.au/tutorials/how-to-use-ws2812b-rgb-leds-with-raspberry-pi-pico.html) example that I found online, add the features that we need (reading from file, parsing the frame) and remove the ones that we don't need
+Somebody for sure has already used WS2812b with the pi pico, right? Right. 
+I don't think reinventing the wheel is a smart thing to do (usually), so let's start from [THIS](https://core-electronics.com.au/tutorials/how-to-use-ws2812b-rgb-leds-with-raspberry-pi-pico.html) example that I found online, add the features that we need (reading from file, parsing the frame) and remove the ones that we don't need.  
 To handle I/O the Pi Pico has feature called PIO, which is basically a programmable coprocessor dedicated to handling I/O.  
-The PIO ASM code to handle the WS2812b protocol is already implemented in the example we're starting from, so we don't have to do it, but PIO seems like an interesting feature to me and I'll probably experiment more with it in the future.  
-https://blues.io/blog/raspberry-pi-pico-pio/
+The PIO ASM code to handle the WS2812b protocol is already implemented in the example we're starting from, so we don't have to do it, but PIO seems like an interesting feature to me and I'll probably experiment more with it in the future. 
+You can find more info on the PIO [HERE.](https://blues.io/blog/raspberry-pi-pico-pio/)
 
 Here is the commented code that I ended up using for the "final" version of this:
 
