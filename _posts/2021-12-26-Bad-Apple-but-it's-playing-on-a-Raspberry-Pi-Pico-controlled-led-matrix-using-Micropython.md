@@ -7,23 +7,23 @@ A couple months ago I bought some of the (at the time) new Raspberry Pi Pico fro
 Coincidentally, I also bought some 2 16x16 and 1 8x32 led matrices.
 And I obviously had no real use for all these things that I impulse-bought.
 
-So I needed some kind of project to:
-1) Justify buying stuff that I didn't need
-2) Try out micropython. The idea of using python on a microcontroller seems kind of *_interesting_* to me.
+So I needed some kind of project to:  
+1. Justify buying stuff that I didn't need
+2. Try out micropython. The idea of using python on a microcontroller seems kind of *_interesting_* to me.
 
-The question now is: what kind of project?
+The question now is: what kind of project?  
 And, me being me, there is only one answer: **BAD APPLE!**
 There will never be enough devices running bad apple in this world.
 
 Bad apple is a really nice video to play on led matrices because it only needs 2 colours and is recognizable even when played at low resolution.
 
-Let's start by laying out some requirements:
+Let's start by laying out some requirements:  
 1) The video should be playing at full speed
 2) No input from an external computer / device should be needed, everything has to be self-contained into the Pi Pico
 
-This means that we need:
-1) A 32x24 version of bad apple small enough to fit into the Pi Pico onboard memory
-2) Code fast enough to read a frame and push it to the led matrices at least 15 times each second. Python on a microcontroller sounds slow to me, so this might not be as easy as it sounds.
+This means that we need:  
+1. A 32x24 version of bad apple small enough to fit into the Pi Pico onboard memory
+2. Code fast enough to read a frame and push it to the led matrices at least 15 times each second. Python on a microcontroller sounds slow to me, so this might not be as easy as it sounds.
 
 Let's start by downloading a bad apple video from youtube.
 I used youtube-dl, but you can use whatever you want.
@@ -32,13 +32,13 @@ Again, you can use whatever tool you want, but I personally used old reliable ff
 	
 Now we have a bunch of pictures (and we don't need half of them, we're aiming for 15fps, not 30fps).
 But we need to do some more preparation before we can use them:
-1) The resolution is obviously waaaay too big for our 32x24 led matrix
-2) These pictures are not really using only 2 colours: there are shades of grey at the edges
+1. The resolution is obviously waaaay too big for our 32x24 led matrix
+2. These pictures are not really using only 2 colours: there are shades of grey at the edges
 
 So I set up a batch job in photoshop that does this:
-1) Convert the image to indexed color, with a 2 color palette (black and white)
-2) Resize the image to 32x24
-3) Save it as a BMP
+1. Convert the image to indexed color, with a 2 color palette (black and white)
+2. Resize the image to 32x24
+3. Save it as a BMP
 
 Now we're ready to "convert" the frames in a format of our liking that we can then read on the Pi Pico.
 If we want our file to be able to be played by the Pi Pico with the minimal amount of processing possible, in this phase of our work we need to already account for how the matrices are wired.
