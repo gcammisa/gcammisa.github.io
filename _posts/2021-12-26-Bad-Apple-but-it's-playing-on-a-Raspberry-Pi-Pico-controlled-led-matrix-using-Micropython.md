@@ -11,7 +11,7 @@ So I needed some kind of project to:
 1. Justify buying stuff that I didn't need
 2. Try out micropython. The idea of using python on a microcontroller seems kind of *_interesting_* to me.
 
-The question now is: what kind of project?  
+The question now is: what kind of project? 
 And, me being me, there is only one answer: **BAD APPLE!**
 There will never be enough devices running bad apple in this world.
 
