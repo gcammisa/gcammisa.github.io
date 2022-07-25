@@ -3,35 +3,35 @@ layout: post
 title: Bad Apple, but i wanted it to play on a Raspberry Pi Pico using micropython to control a led matrix
 ---
 
-A couple months ago I bought some of the (at the time) new Raspberry Pi Pico from aliexpress.
-Coincidentally, I also bought some 2 16x16 and 1 8x32 led matrices.
-And I obviously had no real use for all these things that I impulse-bought.
+A couple months ago I bought some of the (at the time) new Raspberry Pi Pico from aliexpress.  
+Coincidentally, I also bought some 2 16x16 and 1 8x32 led matrices.  
+And I obviously had no real use for all these things that I impulse-bought.  
 
 So I needed some kind of project to: 
 1. Justify buying stuff that I didn't need
 2. Try out micropython. The idea of using python on a microcontroller seems kind of *_interesting_* to me.
 
-The question now is: what kind of project? 
-And, me being me, there is only one answer: **BAD APPLE!**
+The question now is: what kind of project?  
+And, me being me, there is only one answer: **BAD APPLE!**  
 There will never be enough devices running bad apple in this world.
 
 Bad apple is a really nice video to play on led matrices because it only needs 2 colours and is recognizable even when played at low resolution.
 
 Let's start by laying out some requirements:  
-1) The video should be playing at full speed
-2) No input from an external computer / device should be needed, everything has to be self-contained into the Pi Pico
+1. The video should be playing at full speed
+2. No input from an external computer / device should be needed, everything has to be self-contained into the Pi Pico
 
 This means that we need:  
 1. A 32x24 version of bad apple small enough to fit into the Pi Pico onboard memory
 2. Code fast enough to read a frame and push it to the led matrices at least 15 times each second. Python on a microcontroller sounds slow to me, so this might not be as easy as it sounds.
 
-Let's start by downloading a bad apple video from youtube.
-I used youtube-dl, but you can use whatever you want.
-Now we need to extract the frames from this video.
-Again, you can use whatever tool you want, but I personally used old reliable ffmpeg.
+Let's start by downloading a bad apple video from youtube.  
+I used youtube-dl, but you can use whatever you want.  
+Now we need to extract the frames from this video.  
+Again, you can use whatever tool you want, but I personally used old reliable ffmpeg.  
 	
-Now we have a bunch of pictures (and we don't need half of them, we're aiming for 15fps, not 30fps).
-But we need to do some more preparation before we can use them:
+Now we have a bunch of pictures (and we don't need half of them, we're aiming for 15fps, not 30fps).  
+But we need to do some more preparation before we can use them:  
 1. The resolution is obviously waaaay too big for our 32x24 led matrix
 2. These pictures are not really using only 2 colours: there are shades of grey at the edges
 
@@ -40,16 +40,16 @@ So I set up a batch job in photoshop that does this:
 2. Resize the image to 32x24
 3. Save it as a BMP
 
-Now we're ready to "convert" the frames in a format of our liking that we can then read on the Pi Pico.
-If we want our file to be able to be played by the Pi Pico with the minimal amount of processing possible, in this phase of our work we need to already account for how the matrices are wired.
-In my setup the matrices are wired in series, and each matrix is wired as if it was a long led strip, with the even columns going from top to bottom and the odd columns going from bottom to top. 
+Now we're ready to "convert" the frames in a format of our liking that we can then read on the Pi Pico.  
+If we want our file to be able to be played by the Pi Pico with the minimal amount of processing possible, in this phase of our work we need to already account for how the matrices are wired.  
+In my setup the matrices are wired in series, and each matrix is wired as if it was a long led strip, with the even columns going from top to bottom and the odd columns going from bottom to top.   
 
-After some trial and error I chose to convert each pixel to 1 bit (1 = black, 0 = white), group them in chunks of 4 and encode each chunk as an HEX char in a text file that we can then load into the Pi Pico memory.
-There are many better ways to do this (like just using a simple binary file, or something like RLE compression), but I didn't deem it necessary for this "POC".
+After some trial and error I chose to convert each pixel to 1 bit (1 = black, 0 = white), group them in chunks of 4 and encode each chunk as an HEX char in a text file that we can then load into the Pi Pico memory.  
+There are many better ways to do this (like just using a simple binary file, or something like RLE compression), but I didn't deem it necessary for this "POC".  
 
-So what we need is a python script that reads all our bitmaps containing the frames, writes a 1 or 0 for each pixel of each bitmap, rearranges the bits to account for the wiring of the matrices and then saves the output as hex text.
+So what we need is a python script that reads all our bitmaps containing the frames, writes a 1 or 0 for each pixel of each bitmap, rearranges the bits to account for the wiring of the matrices and then saves the output as hex text.  
 I did this in two different "stages": one script to convert the bitmaps to binary text and another script to convert that to hex text
-The scripts are extremely ugly, but they work and we only need to run them once.
+The scripts are extremely ugly, but they work and we only need to run them once.  
 Code to convert the bitmaps to binary text:
 ```python
 from PIL import Image
@@ -127,13 +127,13 @@ while True:
 f.close()
 ```
 
-It's ugly and kinda slow, but it gets the job done and we need to run it only once.
+It's ugly and kinda slow, but it gets the job done and we need to run it only once.  
 
-Now we need to write some micropython code to control our led matrices, which is basically a long folded string of WS2812b LEDs.
-Somebody for sure has already used WS2812b with the pi pico, right? Right.
+Now we need to write some micropython code to control our led matrices, which is basically a long folded string of WS2812b LEDs.  
+Somebody for sure has already used WS2812b with the pi pico, right? Right.  
 I don't think reinventing the wheel is a smart thing to do (usually), so let's start from [THIS](https://core-electronics.com.au/tutorials/how-to-use-ws2812b-rgb-leds-with-raspberry-pi-pico.html) example that I found online, add the features that we need (reading from file, parsing the frame) and remove the ones that we don't need
-To handle I/O the Pi Pico has feature called PIO, which is basically a programmable coprocessor dedicated to handling I/O. 
-The PIO ASM code to handle the WS2812b protocol is already implemented in the example we're starting from, so we don't have to do it, but PIO seems like an interesting feature to me and I'll probably experiment more with it in the future.
+To handle I/O the Pi Pico has feature called PIO, which is basically a programmable coprocessor dedicated to handling I/O.  
+The PIO ASM code to handle the WS2812b protocol is already implemented in the example we're starting from, so we don't have to do it, but PIO seems like an interesting feature to me and I'll probably experiment more with it in the future.  
 https://blues.io/blog/raspberry-pi-pico-pio/
 
 Here is the commented code that I ended up using for the "final" version of this:
