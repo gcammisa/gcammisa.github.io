@@ -7,7 +7,7 @@ A couple months ago I bought some of the (at the time) new Raspberry Pi Pico fro
 Coincidentally, I also bought some 2 16x16 and 1 8x32 led matrices.
 And I obviously had no real use for all these things that I impulse-bought.
 
-So I needed some kind of project to:  
+So I needed some kind of project to: 
 1. Justify buying stuff that I didn't need
 2. Try out micropython. The idea of using python on a microcontroller seems kind of *_interesting_* to me.
 
